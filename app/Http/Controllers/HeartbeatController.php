@@ -37,7 +37,7 @@ class HeartbeatController extends Controller
             'id.required'         => 'Masukkan ID !',
             'name.required'       => 'Masukkan Nama !',
             'schedule.required'   => 'Masukkan Schedule !',
-            'urls.required'       => 'Masukkan URL',
+            'hosts.required'       => 'Masukkan URL',
             'ipv4.required'       => 'Masukkan IP v4',
             'ipv6.required'       => 'Masukkan IP v6',
             'mode.required'       => 'Masukkan Mode'
@@ -49,7 +49,7 @@ class HeartbeatController extends Controller
             'id'         => 'required',
             'name'       => 'required',
             'schedule'   => 'required',
-            'urls'       => 'required',
+            'hosts'       => 'required',
             'ipv4_monitor'       => 'required',
             'ipv6_monitor'       => 'required',
             'mode'       => 'required',
@@ -60,7 +60,7 @@ class HeartbeatController extends Controller
         $id_monitor = $request->input('id');
         $name_monitor = $request->input('name');
         $schedule_monitor = $request->input('schedule');
-        $urls_monitor = $request->input('urls');
+        $hosts_monitor = $request->input('hosts');
         $ipv4_monitor = (boolean)$request->input('ipv4_monitor');
         $ipv6_monitor = (boolean)$request->input('ipv6_monitor');
         $mode_monitor = $request->input('mode');
@@ -93,7 +93,7 @@ class HeartbeatController extends Controller
             //     'id'        => 'id-baru',
             //     'name'      => 'Coba tambah',
             //     'schedule'  => '@every 5s',
-            //     'urls'      => [
+            //     'hosts'      => [
             //         'http://coba.domain'
             //     ],
             //     'ipv4'      => true,
@@ -106,7 +106,7 @@ class HeartbeatController extends Controller
                 'id'        => $id_monitor,
                 'name'      => $name_monitor,
                 'schedule'  => $schedule_monitor,
-                'urls'      => $urls_monitor,
+                'hosts'      => $hosts_monitor,
                 'ipv4'      => $ipv4_monitor,
                 'ipv6'      => $ipv6_monitor,
                 'mode'      => $mode_monitor
