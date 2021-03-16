@@ -86,21 +86,6 @@ class HeartbeatController extends Controller
                 ], 406);
             }
 
-            // create new array
-
-            // $newPushArray = [
-            //     'type'      => 'http',
-            //     'id'        => 'id-baru',
-            //     'name'      => 'Coba tambah',
-            //     'schedule'  => '@every 5s',
-            //     'hosts'      => [
-            //         'http://coba.domain'
-            //     ],
-            //     'ipv4'      => true,
-            //     'ipv6'      => true,
-            //     'mode'      => 'any'
-            // ];
-
             $newPushArray = [
                 'type'      => $type_monitor,
                 'id'        => $id_monitor,
@@ -115,8 +100,6 @@ class HeartbeatController extends Controller
             // masukkan array baru ke daftar
             array_push($oldArray['heartbeat.monitors'], $newPushArray);
 
-            // Tes tampilkan
-            // echo '<pre>'; print_r($oldArray); echo '</pre>';
 
             // buat jadi yaml
             $yaml = Yaml::dump($oldArray, 2, 1);
@@ -124,8 +107,8 @@ class HeartbeatController extends Controller
             // masukkan ke file
             file_put_contents(env('HEARTBEAT_YML_PATH'), $yaml);
 
-
-            // echo "berhasil tambah data";
+            shell_exec('sudo /alterra/scripts/move-the-monitors.sh heartbeat.yml');
+            shell_exec('sudo /alterra/scripts/restart-heartbeat-svc.sh');
 
             return response()->json([
                 'message' => 'Data Berhasil di Tambahkan !',
@@ -171,6 +154,9 @@ class HeartbeatController extends Controller
 
             // masukkan ke file
             file_put_contents(env('HEARTBEAT_YML_PATH'), $yaml);
+
+            shell_exec('sudo /alterra/scripts/move-the-monitors.sh heartbeat.yml');
+            shell_exec('sudo /alterra/scripts/restart-heartbeat-svc.sh');
 
             return response()->json([
                 'message' => 'Data Berhasil di Hapus !',
